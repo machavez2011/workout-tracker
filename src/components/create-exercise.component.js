@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -20,10 +21,18 @@ export default class CreateExercise extends Component {
     }
 
     componentDidMount() {
-        this.setState({
-            username: 'test user',
-            users:['test user']
-        })
+        axios.get('http://localhost:5000/users/')
+            .then(response => {
+                if (response.data.length > 0) {
+                    this.setState({
+                        username: response.data[0].username,
+                        users: response.data
+                    });
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     }
 
     onChangeUsername(e) {
@@ -62,6 +71,9 @@ export default class CreateExercise extends Component {
 
         console.log(exercise);
 
+        axios.post('http://localhost:5000/exercises/add', exercise)
+        .then(res => console.log(res.data))
+
         window.location = '/';
     }
 
@@ -73,7 +85,6 @@ export default class CreateExercise extends Component {
                     <div className="form-group">
                         <label>Username: </label>
                         <select 
-                            ref="userInput"
                             required
                             className="form-control"
                             value={this.state.username}
@@ -81,8 +92,8 @@ export default class CreateExercise extends Component {
                             {
                                 this.state.users.map(function (user) {
                                     return <option
-                                        key={user}
-                                        value={user}>{user}
+                                        key={user._id}
+                                        value={user.username}>{user.username}
                                     </option>;
                                 })
                             }
