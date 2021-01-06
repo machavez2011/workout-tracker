@@ -1,14 +1,26 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class CreateUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: ''
+            username: '',
+            allUsers: []
         }
 
+        this.getAllUsers = this.getAllUsers.bind(this);
         this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        this.getAllUsers();
+    }
+
+    getAllUsers() {
+        axios.get('http://localhost:5000/users/')
+        .then(res => this.setState({allUsers: res.data}))
     }
 
     onChangeUsername(e) {
@@ -26,9 +38,14 @@ export default class CreateUser extends Component {
 
         console.log(newUser);
 
+        axios.post('http://localhost:5000/users/add', newUser)
+            .then(res => console.log(res.data));
+
         this.setState({
             username: ''
         })
+
+        this.getAllUsers();
     }
 
     render() {
@@ -50,6 +67,14 @@ export default class CreateUser extends Component {
                         <input type="submit" value="Create User" className="btn btn-primary" />
                     </div>
                 </form>
+
+                <div>
+                    <ul>
+                        {this.state.allUsers.map((user)=> {
+                            return <li key={user._id}>{user.username}</li>
+                        })}
+                    </ul>
+                </div>
             </div>
         )
     }
