@@ -42,8 +42,6 @@ export default class ExercisesList extends Component {
     }
 
     deleteExercise(id) {
-        //const id = e.target.parentElement.id;
-
         axios.delete(`http://localhost:5000/exercises/${id}`)
             .then(res => console.log(res.data))
         
