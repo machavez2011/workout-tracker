@@ -19,7 +19,7 @@ export default class CreateUser extends Component {
     }
 
     getAllUsers() {
-        axios.get('http://localhost:5000/users/')
+        axios.get('http://localhost:5000/api/users/')
         .then(res => this.setState({allUsers: res.data}))
     }
 
@@ -38,7 +38,7 @@ export default class CreateUser extends Component {
 
         console.log(newUser);
 
-        axios.post('http://localhost:5000/users/add', newUser)
+        axios.post('http://localhost:5000/api/users/add', newUser)
             .then(res => console.log(res.data));
 
         this.setState({
