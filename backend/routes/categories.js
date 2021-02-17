@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { rawListeners } = require('../models/category.model');
 let Category = require('../models/category.model');
 
 router.route('/').get((req, res) => {
@@ -15,6 +16,29 @@ router.route('/add').post((req, res) => {
     newCategory.save()
         .then(() => res.json('Category added!'))
         .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/:id').get((req, res) => {
+    Category.findById(req.params.id)
+    .then(category => res.json(category))
+    .catch(err => res.status(400).json('Error: ' + err));
+})
+
+router.route('/:id').delete((req, res) => {
+    Category.findByIdAndDelete(req.params.id)
+    .then(() => res.json('Category deleted.'))
+    .catch(err => res.status(400).json('Error: ' + err))
+})
+
+router.route('/update/:id').post((req, res) => {
+    Category.findById(req.params.id)
+    .then(category => {
+        category.name = req.body.name;
+
+        category.save()
+        .then(() => res.json('Category updated!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+    })
 })
 
 module.exports = router;
