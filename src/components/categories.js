@@ -53,6 +53,16 @@ export default function Categories() {
         }
     }
 
+    const deleteCategory = async e => {
+        let id = e.target.parentNode.id;
+        try {
+            await axios.delete(`http://localhost:5000/api/categories/${id}`);
+            getCategories();
+        } catch(err) {
+            alert(err)
+        }
+    }
+
     return (
         <div>
             <ul>
@@ -62,6 +72,9 @@ export default function Categories() {
                             {category.name}
                             <button type="button" className="btn btn-secondary" data-toggle="modal" data-target="#addUpdateModal" onClick={getCategoryByID}>
                                 Edit
+                            </button>
+                            <button className='btn btn-danger' onClick={deleteCategory}>
+                                Delete
                             </button>
                         </li>
                     )
