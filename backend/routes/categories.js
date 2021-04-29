@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const { rawListeners } = require('../models/category.model');
 let Category = require('../models/category.model');
 
 router.route('/').get((req, res) => {

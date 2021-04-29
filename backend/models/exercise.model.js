@@ -3,10 +3,21 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const exerciseSchema = new Schema({
-    username: { type: String, required: true },
-    description: { type: String, required: true },
-    duration: { type: Number, required: true },
-    date: { type: Date, required: true },
+    name: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true,
+        minlength: 3
+    },
+    type: { type: String, required: true },
+    category: { type: String, required: true },
+    goal: {
+        isHit: { type: Boolean, required: true },
+        weight: { type: Number, required: false },
+        sets: { type: Number, required: false },
+        reps: { type: Number, required: false }
+    }
 }, {
     timestamps: true,
 });
