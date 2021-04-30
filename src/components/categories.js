@@ -21,7 +21,7 @@ export default function Categories() {
             const res = await axios.get('http://localhost:5000/api/categories/');
             setCategories(res.data);
         }
-        catch (err){
+        catch(err) {
             alert(err);
         }
     }
