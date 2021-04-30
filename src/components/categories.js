@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import AddUpdateModal from './addUpdateModal';
+import AddUpdateModal from './addUpdate/addUpdateModal';
 
 export default function Categories() {
     const [allCategories, setCategories] = useState([]);
@@ -39,6 +39,7 @@ export default function Categories() {
     }
 
     const saveCategory = async _ => {
+        console.log('test');
         try {
             if(categoryID) {
                 await axios.post(`http://localhost:5000/api/categories/update/${categoryID}`, { name: categoryName })
@@ -85,7 +86,8 @@ export default function Categories() {
                 Add
             </button>
 
-            <AddUpdateModal 
+            <AddUpdateModal
+                type={'category'}
                 id={categoryID}
                 text={categoryName}
                 updateText={changeCategoryName}

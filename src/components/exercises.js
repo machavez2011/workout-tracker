@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import AddUpdateModal from './addUpdateModal';
+import AddUpdateModal from './addUpdate/addUpdateModal';
 
 export default function Exercises() {
     const [allExercises, setExercises] = useState([]);
@@ -26,7 +26,7 @@ export default function Exercises() {
                 Add
             </button>
 
-            <AddUpdateModal />
+            <AddUpdateModal type={'exercise'}/>
         </div>
     )
 }
