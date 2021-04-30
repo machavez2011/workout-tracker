@@ -8,6 +8,7 @@ import EditWorkout from "./components/edit-workout.component";
 import AddWorkout from "./components/add-workout.component";
 import CreateUser from "./components/create-user.component";
 import Categories from "./components/categories";
+import Exercises from "./components/exercises";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/add" component={AddWorkout} />
         <Route path="/user" component={CreateUser} />
         <Route path="/categories" component={Categories} />
+        <Route path="/exercises" component={Exercises} />
       </div>
     </Router>
   );
