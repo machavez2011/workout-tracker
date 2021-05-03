@@ -13,7 +13,7 @@ export default function ExerciseModal({ props }) {
                 <input className="form-control" type="text" placeholder="Name" value={props.text} onChange={props.updateText} />
             </div>
             <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={props.clear}>Cancelfdsafdsa</button>
+                <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={props.clear}>Cancel</button>
                 <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={props.save}>Save</button>
             </div>
         </div>
