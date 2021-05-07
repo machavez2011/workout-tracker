@@ -4,13 +4,18 @@ import AddUpdateModal from './addUpdate/addUpdateModal';
 
 export default function Exercises() {
     const [allExercises, setExercises] = useState([]);
+    const [allCategories, setCategories] = useState([]);
 
     useEffect(_ => getExercises(), [])
 
     const getExercises = async _ => {
         try {
-            const res = await axios.get('http://localhost:5000/api/exercises/');
-            setExercises(res.data);
+            if(allCategories) {
+                const categories = await axios.get('http://localhost:5000/api/categories/');
+                setCategories(categories.data);
+            }
+            const exercises = await axios.get('http://localhost:5000/api/exercises/');
+            setExercises(exercises.data);
         } catch(err) {
             alert(err);
         }

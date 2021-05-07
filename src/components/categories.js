@@ -13,7 +13,7 @@ export default function Categories() {
 
     const clearInfo = _ => {
         setCategoryName('');
-        setCategoryID(null)
+        setCategoryID(null);
     }
 
     const getCategories = async _ => {
